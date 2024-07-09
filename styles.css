@@ -118,12 +118,12 @@ nav .fa-flag-usa {
 }
 
 .left-arrow {
-    left: -40px;
+    left: -20px;
     position: absolute;
 }
 
 .right-arrow {
-    right: -20px; 
+    right: -50px; 
     position: absolute;
 }
 
@@ -175,4 +175,54 @@ footer p {
     font-size: 1rem;
     color: #4e51f3; 
     margin: 0;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    nav h1 {
+        font-size: 1.0rem;
+    }
+
+    .flashcard {
+        width: 280px;
+        height: 180px;
+        margin: 0 20px; 
+    }
+
+    .left-arrow, .right-arrow {
+        font-size: 1.5rem;
+    }
+
+    .container, .search-container {
+        margin-top: 60px;
+    }
+
+    #question, #answer {
+        font-size: 1.2rem;
+    }
+
+    button, #search-input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;
+    }
+
+    .flashcard {
+        margin: 0 10px; 
+    }
+
+    nav, footer {
+        flex-direction: column;
+        padding: 5px 0;
+    }
+
+    .left-arrow, .right-arrow {
+        font-size: 1.2rem;
+    }
 }
