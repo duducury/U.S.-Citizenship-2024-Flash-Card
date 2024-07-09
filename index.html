@@ -16,8 +16,10 @@
             <button class="shuffle-button" onclick="shuffleCards()">Shuffle</button>
             <button class="favorites-button" onclick="toggleFavoriteMode()">View Favorites</button>
         </div>
-        <p id="question-number"></p>
-        <i class="fas fa-star favorite-icon" onclick="toggleFavorite(event)"></i>
+        <div class="question-section">
+            <p id="question-number"></p>
+            <i class="fas fa-star favorite-icon" onclick="toggleFavorite(event)"></i>
+        </div>
         <div class="card-wrapper">
             <div class="arrow left-arrow" onclick="prevCard()">&#9664;</div>
             <div class="flashcard" onclick="flipCard()">
