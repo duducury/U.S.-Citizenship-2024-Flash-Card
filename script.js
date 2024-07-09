@@ -1,5 +1,7 @@
 let currentCardIndex = 0;
-const cards = [
+let favoriteMode = false;
+let favorites = new Set();
+const originalCards = [
     { question: "What is the supreme law of the land?", answer: "the Constitution" },
     { question: "What does the Constitution do?", answer: "sets up the government, defines the government, protects basic rights of Americans" },
     { question: "The idea of self-government is in the first three words of the Constitution. What are these words?", answer: "We the People" },
@@ -101,15 +103,25 @@ const cards = [
     { question: "When do we celebrate Independence Day?", answer: "July 4" },
     { question: "Name two national U.S. holidays.", answer: "New Year’s Day, Martin Luther King, Jr. Day, Presidents’ Day, Memorial Day, Independence Day, Labor Day, Columbus Day, Veterans Day, Thanksgiving, Christmas" }
 ];
+let cards = [...originalCards];
 
 document.addEventListener("DOMContentLoaded", () => {
     displayCard();
 });
 
 function displayCard() {
+    const card = cards[currentCardIndex];
     document.getElementById("question-number").textContent = `Question ${currentCardIndex + 1} of ${cards.length}`;
-    document.getElementById("question").textContent = cards[currentCardIndex].question;
-    document.getElementById("answer").textContent = cards[currentCardIndex].answer;
+    document.getElementById("question").textContent = card.question;
+    document.getElementById("answer").textContent = card.answer;
+
+    const favoriteIcon = document.querySelector(".favorite-icon");
+    if (favorites.has(originalCards.indexOf(card))) {
+        favoriteIcon.classList.add("active");
+    } else {
+        favoriteIcon.classList.remove("active");
+    }
+
     document.querySelector(".flashcard").classList.remove("flipped");
 }
 
@@ -137,4 +149,39 @@ function searchCard() {
     } else {
         alert("Please enter a valid question number between 1 and 100.");
     }
+}
+
+function shuffleCards() {
+    for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    currentCardIndex = 0;
+    displayCard();
+}
+
+function toggleFavorite(event) {
+    event.stopPropagation();
+    const actualCardIndex = favoriteMode ? Array.from(favorites)[currentCardIndex] : currentCardIndex;
+    if (favorites.has(actualCardIndex)) {
+        favorites.delete(actualCardIndex);
+    } else {
+        favorites.add(actualCardIndex);
+    }
+    displayCard();
+}
+
+function toggleFavoriteMode() {
+    favoriteMode = !favoriteMode;
+    const favoritesButton = document.querySelector(".favorites-button");
+
+    if (favoriteMode) {
+        cards = originalCards.filter((_, index) => favorites.has(index));
+        favoritesButton.textContent = "View All Cards";
+    } else {
+        cards = [...originalCards];
+        favoritesButton.textContent = "View Favorites";
+    }
+    currentCardIndex = 0;
+    displayCard();
 }
