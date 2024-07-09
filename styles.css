@@ -70,10 +70,17 @@ nav .fa-flag-usa {
     transform: scale(1.1);
 }
 
+/* Question section styling */
+.question-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
 #question-number {
     font-size: 1.5rem;
-    margin-bottom: 20px;
-    display: inline-block;
+    margin: 0 10px;
 }
 
 /* Favorite icon styling */
@@ -83,9 +90,6 @@ nav .fa-flag-usa {
     cursor: pointer;
     user-select: none;
     transition: transform 0.3s;
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: middle;
 }
 
 .favorite-icon:hover {
