@@ -1,6 +1,4 @@
 let currentCardIndex = 0;
-let favoriteMode = false;
-let favorites = new Set();
 const originalCards = [
     { question: "What is the supreme law of the land?", answer: "the Constitution" },
     { question: "What does the Constitution do?", answer: "sets up the government, defines the government, protects basic rights of Americans" },
@@ -103,24 +101,19 @@ const originalCards = [
     { question: "When do we celebrate Independence Day?", answer: "July 4" },
     { question: "Name two national U.S. holidays.", answer: "New Year’s Day, Martin Luther King, Jr. Day, Presidents’ Day, Memorial Day, Independence Day, Labor Day, Columbus Day, Veterans Day, Thanksgiving, Christmas" }
 ];
-let cards = originalCards.map((card, index) => ({ ...card, originalIndex: index }));
+let preTestCards = [];
+let preTestScore = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
+    startPreTest();
     displayCard();
 });
 
 function displayCard() {
-    const card = cards[currentCardIndex];
-    document.getElementById("question-number").textContent = `Question ${currentCardIndex + 1} of ${cards.length}`;
+    const card = preTestCards[currentCardIndex];
+    document.getElementById("question-number").textContent = `Question ${currentCardIndex + 1} of ${preTestCards.length}`;
     document.getElementById("question").textContent = card.question;
     document.getElementById("answer").textContent = card.answer;
-
-    const favoriteIcon = document.querySelector(".favorite-icon");
-    if (favorites.has(card.originalIndex)) {
-        favoriteIcon.classList.add("active");
-    } else {
-        favoriteIcon.classList.remove("active");
-    }
 
     document.querySelector(".flashcard").classList.remove("flipped");
 }
@@ -130,66 +123,48 @@ function flipCard() {
 }
 
 function prevCard() {
-    currentCardIndex = (currentCardIndex - 1 + cards.length) % cards.length;
+    currentCardIndex = (currentCardIndex - 1 + preTestCards.length) % preTestCards.length;
     displayCard();
 }
 
 function nextCard() {
-    currentCardIndex = (currentCardIndex + 1) % cards.length;
+    currentCardIndex = (currentCardIndex + 1) % preTestCards.length;
     displayCard();
 }
 
-function searchCard() {
-    const searchInput = document.getElementById("search-input").value;
-    const questionNumber = parseInt(searchInput, 10);
+function startPreTest() {
+    preTestScore = 0;
+    document.querySelector(".pretest-result").style.display = "none";
+    preTestCards = originalCards.sort(() => 0.5 - Math.random()).slice(0, 10);
+    currentCardIndex = 0;
+    displayCard();
+}
 
-    if (!isNaN(questionNumber) && questionNumber >= 1 && questionNumber <= cards.length) {
-        currentCardIndex = questionNumber - 1;
+function markCorrect(event) {
+    event.stopPropagation();
+    preTestScore++;
+    nextPreTestQuestion();
+}
+
+function markIncorrect(event) {
+    event.stopPropagation();
+    nextPreTestQuestion();
+}
+
+function nextPreTestQuestion() {
+    if (currentCardIndex < preTestCards.length - 1) {
+        currentCardIndex++;
         displayCard();
     } else {
-        alert("Please enter a valid question number between 1 and 100.");
+        showTestScore();
     }
 }
 
-function shuffleCards() {
-    for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-    }
-    currentCardIndex = 0;
-    displayCard();
+function showTestScore() {
+    document.querySelector(".pretest-result").style.display = "block";
+    document.getElementById("pretest-score").textContent = `Your score: ${preTestScore}/10`;
 }
 
-function toggleFavorite(event) {
-    event.stopPropagation();
-    const actualCard = cards[currentCardIndex];
-    const actualCardIndex = actualCard.originalIndex;
-    if (favorites.has(actualCardIndex)) {
-        favorites.delete(actualCardIndex);
-    } else {
-        favorites.add(actualCardIndex);
-    }
-    displayCard();
-}
-
-function toggleFavoriteMode() {
-    favoriteMode = !favoriteMode;
-    const favoritesButton = document.querySelector(".favorites-button");
-
-    if (favoriteMode) {
-        const favoriteCards = originalCards.filter((_, index) => favorites.has(index)).map((card, index) => ({ ...card, originalIndex: index }));
-        if (favoriteCards.length > 0) {
-            cards = favoriteCards;
-            favoritesButton.textContent = "View All Cards";
-        } else {
-            alert("No favorite cards selected.");
-            favoriteMode = false;
-            return;
-        }
-    } else {
-        cards = originalCards.map((card, index) => ({ ...card, originalIndex: index }));
-        favoritesButton.textContent = "View Favorites";
-    }
-    currentCardIndex = 0;
-    displayCard();
+function goToMainPage() {
+    window.location.href = "index.html";
 }

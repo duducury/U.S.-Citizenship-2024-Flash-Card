@@ -1,3 +1,61 @@
+/* Pretest button styling */
+.pretest-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #f4a261;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 0 10px;
+}
+
+.pretest-button:hover {
+    background-color: #e76f51;
+    transform: scale(1.1);
+}
+
+/* Pretest icons styling */
+.pretest-icons {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 10px; /* Adjusted top position */
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.like-icon, .dislike-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+}
+
+.like-icon {
+    color: blue;
+    left: 25px;
+    top: 10px; /* Adjusted top position */
+}
+
+.dislike-icon {
+    color: red;
+    right: 25px;
+    top: 10px; /* Adjusted top position */
+}
+
+.like-icon:hover, .dislike-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Pretest result styling */
+.pretest-result {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #e9c46a;
+}
+
 /* General styling */
 body {
     font-family: 'Roboto', sans-serif;
@@ -278,4 +336,25 @@ footer p {
     .left-arrow, .right-arrow {
         font-size: 1.2rem;
     }
+}
+.hidden {
+    display: none;
+}
+.main-page-button-container {
+    margin-top: 90px; 
+}
+.main-page-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.main-page-button:hover {
+    background-color: #3b78d8;
+    transform: scale(1.1);
 }
