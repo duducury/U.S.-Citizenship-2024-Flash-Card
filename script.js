@@ -3,8 +3,8 @@ let favoriteMode = false;
 let favorites = new Set();
 const originalCards = [
     { question: "What is the supreme law of the land?", answer: "the Constitution" },
-    { question: "What does the Constitution do?", answer: "sets up the government, defines the government, protects basic rights of Americans" },
-    { question: "The idea of self-government is in the first three words of the Constitution. What are these words?", answer: "We the People" },
+    { question: "Name one thing the U.S. Constitution does.", answer: "forms the government, defines the government, defines the parts of the government, protects the rights of the people" },
+    { question: "What does “We the People” mean?", answer: "self-government, popular sovereignty, consent of the governed, people should govern themselves" },
     { question: "What is an amendment?", answer: "a change (to the Constitution), an addition (to the Constitution)" },
     { question: "What do we call the first ten amendments to the Constitution?", answer: "the Bill of Rights" },
     { question: "What is one right or freedom from the First Amendment?", answer: "speech, religion, assembly, press, petition the government" },
@@ -14,6 +14,9 @@ const originalCards = [
     { question: "What is freedom of religion?", answer: "You can practice any religion, or not practice a religion." },
     { question: "What is the economic system in the United States?", answer: "capitalist economy, market economy" },
     { question: "What is the “rule of law”?", answer: "Everyone must follow the law. Leaders must obey the law. Government must obey the law. No one is above the law." },
+    { question: "What is the form of government of the United States?", answer: "Republic, representative democracy, constitutional republic" },
+    { question: "What is the purpose of the Bill of Rights?", answer: "to protect the basic rights of Americans, to limit the power of the government" },
+
     { question: "Name one branch or part of the government.", answer: "Congress, legislative, President, executive, the courts, judicial" },
     { question: "What stops one branch of government from becoming too powerful?", answer: "checks and balances, separation of powers" },
     { question: "Who is in charge of the executive branch?", answer: "the President" },
@@ -26,6 +29,7 @@ const originalCards = [
     { question: "We elect a U.S. Representative for how many years?", answer: "two (2)" },
     { question: "Name your U.S. Representative.", answer: "Answers will vary." },
     { question: "Who does a U.S. Senator represent?", answer: "all people of the state" },
+    { question: "Who does a U.S. Representative represent?", answer: "all people of the district, all people of the state" },
     { question: "Why do some states have more Representatives than other states?", answer: "because of the state’s population, they have more people, some states have more people" },
     { question: "We elect a President for how many years?", answer: "four (4)" },
     { question: "In what month do we vote for President?", answer: "November" },
@@ -33,12 +37,14 @@ const originalCards = [
     { question: "What is the name of the Vice President of the United States now?", answer: "Visit uscis.gov/citizenship/testupdates for the name of the Vice President of the United States." },
     { question: "If the President can no longer serve, who becomes President?", answer: "the Vice President" },
     { question: "If both the President and the Vice President can no longer serve, who becomes President?", answer: "the Speaker of the House" },
+    { question: "Who becomes President if the President, Vice President, and Speaker of the House can no longer serve?", answer: "the President pro tempore of the Senate" },
     { question: "Who is the Commander in Chief of the military?", answer: "the President" },
     { question: "Who signs bills to become laws?", answer: "the President" },
     { question: "Who vetoes bills?", answer: "the President" },
     { question: "What does the President’s Cabinet do?", answer: "advises the President" },
     { question: "What are two Cabinet-level positions?", answer: "Secretary of Agriculture, Secretary of Commerce, Secretary of Defense, Secretary of Education, Secretary of Energy, Secretary of Health and Human Services, Secretary of Homeland Security, Secretary of Housing and Urban Development, Secretary of the Interior, Secretary of Labor, Secretary of State, Secretary of Transportation, Secretary of the Treasury, Secretary of Veterans Affairs, Attorney General, Vice President" },
     { question: "What does the judicial branch do?", answer: "reviews laws, explains laws, resolves disputes (disagreements), decides if a law goes against the Constitution" },
+    { question: "What is judicial review?", answer: "the power of the courts to decide if a law goes against the Constitution" },
     { question: "What is the highest court in the United States?", answer: "the Supreme Court" },
     { question: "How many justices are on the Supreme Court?", answer: "Visit uscis.gov/citizenship/testupdates for the number of justices on the Supreme Court." },
     { question: "Who is the Chief Justice of the United States now?", answer: "Visit uscis.gov/citizenship/testupdates for the name of the Chief Justice of the United States." },
@@ -49,6 +55,13 @@ const originalCards = [
     { question: "What are the two major political parties in the United States?", answer: "Democratic and Republican" },
     { question: "What is the political party of the President now?", answer: "Visit uscis.gov/citizenship/testupdates for the political party of the President." },
     { question: "What is the name of the Speaker of the House of Representatives now?", answer: "Visit uscis.gov/citizenship/testupdates for the name of the Speaker of the House of Representatives." },
+    { question: "What is the electoral college?", answer: "the system that elects the President and Vice President, a group of people who formally select the President based on the results in each state" },
+    { question: "What is impeachment?", answer: "the process by which the House of Representatives can formally charge a federal official, such as the President, with wrongdoing" },
+    { question: "What does the 22nd Amendment do?", answer: "it limits the President to two terms in office" },
+    { question: "What is a primary election?", answer: "an election in which voters choose a political party’s candidate to run in the general election" },
+    { question: "What is a midterm election?", answer: "a national election held two years after a presidential election, when Americans vote for members of Congress" },
+    { question: "Name one power that is granted only to the U.S. Senate.", answer: "confirms presidential nominations (such as Cabinet secretaries and federal judges), approves (ratifies) treaties" },
+
     { question: "There are four amendments to the Constitution about who can vote. Describe one of them.", answer: "Citizens eighteen (18) and older (can vote). You don’t have to pay (a poll tax) to vote. Any citizen can vote. (Women and men can vote.) A male citizen of any race (can vote.)" },
     { question: "What is one responsibility that is only for United States citizens?", answer: "serve on a jury, vote in a federal election" },
     { question: "Name one right only for United States citizens.", answer: "vote in a federal election, run for federal office" },
@@ -58,36 +71,57 @@ const originalCards = [
     { question: "How old do citizens have to be to vote for President?", answer: "eighteen (18) and older" },
     { question: "What are two ways that Americans can participate in their democracy?", answer: "vote, join a political party, help with a campaign, join a civic group, join a community group, give an elected official your opinion on an issue, call Senators and Representatives, publicly support or oppose an issue or policy, run for office, write to a newspaper" },
     { question: "When is the last day you can send in federal income tax forms?", answer: "April 15" },
+    { question: "Why is it important to pay federal, state, and local taxes?", answer: "these taxes pay for services provided by the government, such as schools, roads, and public safety" },
     { question: "When must all men register for the Selective Service?", answer: "at age eighteen (18), between eighteen (18) and twenty-six (26)" },
+
     { question: "What is one reason colonists came to America?", answer: "freedom, political liberty, religious freedom, economic opportunity, practice their religion, escape persecution" },
     { question: "Who lived in America before the Europeans arrived?", answer: "American Indians, Native Americans" },
     { question: "What group of people was taken to America and sold as slaves?", answer: "Africans, people from Africa" },
     { question: "Why did the colonists fight the British?", answer: "because of high taxes (taxation without representation), because the British army stayed in their houses (boarding, quartering), because they didn’t have self-government" },
-    { question: "Who wrote the Declaration of Independence?", answer: "(Thomas) Jefferson" },
+    { question: "Who was the King of England during the American Revolution?", answer: "King George III" },
+    { question: "What is the name of the war fought between the colonies and Great Britain for independence?", answer: "the American Revolution, the Revolutionary War" },
     { question: "When was the Declaration of Independence adopted?", answer: "July 4, 1776" },
     { question: "There were 13 original states. Name three.", answer: "New Hampshire, Massachusetts, Rhode Island, Connecticut, New York, New Jersey, Pennsylvania, Delaware, Maryland, Virginia, North Carolina, South Carolina, Georgia" },
-    { question: "What happened at the Constitutional Convention?", answer: "The Constitution was written, The Founding Fathers wrote the Constitution" },
+    { question: "What happened at the Constitutional Convention?", answer: "The Constitution was written. The Founding Fathers wrote the Constitution." },
     { question: "When was the Constitution written?", answer: "1787" },
+    { question: "In what year was the U.S. Constitution ratified?", answer: "1788" },
+    { question: "What was the Mayflower Compact?", answer: "an early agreement for self-government, signed by the Pilgrims in 1620" },
+
+    { question: "Who wrote the Declaration of Independence?", answer: "(Thomas) Jefferson" },
     { question: "The Federalist Papers supported the passage of the U.S. Constitution. Name one of the writers.", answer: "(James) Madison, (Alexander) Hamilton, (John) Jay, Publius" },
-    { question: "What is one thing Benjamin Franklin is famous for?", answer: "U.S. diplomat, oldest member of the Constitutional Convention, first Postmaster General of the United States, writer of 'Poor Richard’s Almanac', started the first free libraries" },
-    { question: "Who is the 'Father of Our Country'?", answer: "(George) Washington" },
+    { question: "What is one thing Benjamin Franklin is famous for?", answer: "U.S. diplomat, oldest member of the Constitutional Convention, first Postmaster General of the United States, writer of ‘Poor Richard’s Almanac’, started the first free libraries" },
+    { question: "Who is the ‘Father of Our Country’?", answer: "(George) Washington" },
     { question: "Who was the first President?", answer: "(George) Washington" },
+
     { question: "What territory did the United States buy from France in 1803?", answer: "the Louisiana Territory, Louisiana" },
     { question: "Name one war fought by the United States in the 1800s.", answer: "War of 1812, Mexican-American War, Civil War, Spanish-American War" },
     { question: "Name the U.S. war between the North and the South.", answer: "the Civil War, the War between the States" },
     { question: "Name one problem that led to the Civil War.", answer: "slavery, economic reasons, states’ rights" },
+    { question: "Who was President during the Civil War?", answer: "(Abraham) Lincoln" },
     { question: "What was one important thing that Abraham Lincoln did?", answer: "freed the slaves (Emancipation Proclamation), saved (or preserved) the Union, led the United States during the Civil War" },
     { question: "What did the Emancipation Proclamation do?", answer: "freed the slaves, freed slaves in the Confederacy, freed slaves in the Confederate states, freed slaves in most Southern states" },
+    { question: "What did the 13th Amendment do?", answer: "abolished slavery, ended slavery" },
     { question: "What did Susan B. Anthony do?", answer: "fought for women’s rights, fought for civil rights" },
+    { question: "What did the 19th Amendment do?", answer: "gave women the right to vote" },
+
     { question: "Name one war fought by the United States in the 1900s.", answer: "World War I, World War II, Korean War, Vietnam War, (Persian) Gulf War" },
     { question: "Who was President during World War I?", answer: "(Woodrow) Wilson" },
     { question: "Who was President during the Great Depression and World War II?", answer: "(Franklin) Roosevelt" },
+    { question: "In what year did the United States enter World War II?", answer: "1941" },
+    { question: "What Japanese attack brought the United States into World War II?", answer: "the attack on Pearl Harbor" },
     { question: "Who did the United States fight in World War II?", answer: "Japan, Germany, and Italy" },
+    { question: "What did the Marshall Plan do?", answer: "helped European countries rebuild their economies after World War II" },
     { question: "Before he was President, Eisenhower was a general. What war was he in?", answer: "World War II" },
     { question: "During the Cold War, what was the main concern of the United States?", answer: "Communism" },
+    { question: "In what year did the Cold War end?", answer: "1991" },
     { question: "What movement tried to end racial discrimination?", answer: "civil rights (movement)" },
     { question: "What did Martin Luther King, Jr. do?", answer: "fought for civil rights, worked for equality for all Americans" },
+    { question: "What major civil rights law was passed in 1964?", answer: "the Civil Rights Act" },
+    { question: "Name one U.S. military conflict since the year 2000.", answer: "the War in Afghanistan, the War in Iraq" },
     { question: "What major event happened on September 11, 2001, in the United States?", answer: "Terrorists attacked the United States." },
+    { question: "Who was President of the United States during the September 11, 2001 attacks?", answer: "(George W.) Bush" },
+    { question: "Name one American innovation that changed the world.", answer: "the airplane, the light bulb, the internet, the automobile" },
+
     { question: "Name one American Indian tribe in the United States.", answer: "Cherokee, Navajo, Sioux, Chippewa, Choctaw, Pueblo, Apache, Iroquois, Creek, Blackfeet, Seminole, Cheyenne, Arawak, Shawnee, Mohegan, Huron, Oneida, Lakota, Crow, Teton, Hopi, Inuit" },
     { question: "Name one of the two longest rivers in the United States.", answer: "Missouri (River), Mississippi (River)" },
     { question: "What ocean is on the West Coast of the United States?", answer: "Pacific (Ocean)" },
@@ -97,11 +131,14 @@ const originalCards = [
     { question: "Name one state that borders Mexico.", answer: "California, Arizona, New Mexico, Texas" },
     { question: "What is the capital of the United States?", answer: "Washington, D.C." },
     { question: "Where is the Statue of Liberty?", answer: "New York (Harbor), Liberty Island" },
+
     { question: "Why does the flag have 13 stripes?", answer: "because there were 13 original colonies, because the stripes represent the original colonies" },
     { question: "Why does the flag have 50 stars?", answer: "because there is one star for each state, because each star represents a state, because there are 50 states" },
     { question: "What is the name of the national anthem?", answer: "The Star-Spangled Banner" },
+    { question: "What is the White House?", answer: "the official home and workplace of the President of the United States" },
+
     { question: "When do we celebrate Independence Day?", answer: "July 4" },
-    { question: "Name two national U.S. holidays.", answer: "New Year’s Day, Martin Luther King, Jr. Day, Presidents’ Day, Memorial Day, Independence Day, Labor Day, Columbus Day, Veterans Day, Thanksgiving, Christmas" }
+    { question: "Name two national U.S. holidays.", answer: "New Year’s Day, Martin Luther King, Jr. Day, Presidents’ Day, Memorial Day, Juneteenth, Independence Day, Labor Day, Columbus Day, Veterans Day, Thanksgiving, Christmas" }
 ];
 let cards = originalCards.map((card, index) => ({ ...card, originalIndex: index }));
 
@@ -147,7 +184,7 @@ function searchCard() {
         currentCardIndex = questionNumber - 1;
         displayCard();
     } else {
-        alert("Please enter a valid question number between 1 and 100.");
+        alert(`Please enter a valid question number between 1 and ${cards.length}.`);
     }
 }
 

@@ -27,16 +27,18 @@
             <div class="arrow left-arrow" onclick="prevCard()">&#9664;</div>
             <div class="flashcard" onclick="flipCard()">
                 <div class="front">
+                    <div class="card-badge"><span class="card-badge-line"></span><span class="card-badge-icon">🇺🇸</span><span class="card-badge-line"></span></div>
                     <p id="question">Question will appear here</p>
                 </div>
                 <div class="back">
+                    <div class="card-badge"><span class="card-badge-line"></span><span class="card-badge-icon">🇺🇸</span><span class="card-badge-line"></span></div>
                     <p id="answer">Answer will appear here</p>
                 </div>
             </div>
             <div class="arrow right-arrow" onclick="nextCard()">&#9654;</div>
         </div>
         <div class="search-container">
-            <input type="number" id="search-input" placeholder="Number" min="1" max="100">
+            <input type="number" id="search-input" placeholder="Number" min="1" max="128">
             <button onclick="searchCard()">Go</button>
         </div>
     </div>
