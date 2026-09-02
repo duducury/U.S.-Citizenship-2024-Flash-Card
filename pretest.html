@@ -3,46 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flash Card Game</title>
+    <title>Pre-Test - Flash Card Game</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <nav>
         <h1><i class="fas fa-flag-usa"></i> U.S. Citizenship 2024 Flash Card Game <i class="fas fa-flag-usa"></i></h1>
-    </nav> 
-    <div class="pretest-container">
-            <a href="pretest.html" class="pretest-button">Start Pre Test</a>
-        </div>
+    </nav>
+    <h1>Pre Test Page</h1>
+    <div class="pretest-result hidden">
+        <p id="pretest-score">Your score: 0/10</p>
+    </div>
     <div class="container">
-        <div class="top-bar">
-            <button class="shuffle-button" onclick="shuffleCards()">Shuffle</button>
-            <button class="favorites-button" onclick="toggleFavoriteMode()">View Favorites</button>
-        </div>
         <div class="question-section">
             <p id="question-number"></p>
-            <i class="fas fa-star favorite-icon" onclick="toggleFavorite(event)"></i>
         </div>
         <div class="card-wrapper">
             <div class="arrow left-arrow" onclick="prevCard()">&#9664;</div>
             <div class="flashcard" onclick="flipCard()">
                 <div class="front">
+                    <div class="pretest-icons">
+                        <i class="fas fa-thumbs-up like-icon" onclick="markCorrect(event)"></i>
+                        <i class="fas fa-thumbs-down dislike-icon" onclick="markIncorrect(event)"></i>
+                    </div>
                     <p id="question">Question will appear here</p>
                 </div>
                 <div class="back">
+                    <div class="pretest-icons">
+                        <i class="fas fa-thumbs-up like-icon" onclick="markCorrect(event)"></i>
+                        <i class="fas fa-thumbs-down dislike-icon" onclick="markIncorrect(event)"></i>
+                    </div>
                     <p id="answer">Answer will appear here</p>
                 </div>
             </div>
             <div class="arrow right-arrow" onclick="nextCard()">&#9654;</div>
         </div>
-        <div class="search-container">
-            <input type="number" id="search-input" placeholder="Number" min="1" max="100">
-            <button onclick="searchCard()">Go</button>
+        <div class="main-page-button-container">
+            <button class="main-page-button" onclick="goToMainPage()">Go to Main Page</button>
         </div>
     </div>
     <footer>
         <p>Created by Eduardo Cury</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="pretest.js"></script>
 </body>
 </html>

@@ -1,0 +1,360 @@
+/* Pretest button styling */
+.pretest-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #f4a261;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 0 10px;
+}
+
+.pretest-button:hover {
+    background-color: #e76f51;
+    transform: scale(1.1);
+}
+
+/* Pretest icons styling */
+.pretest-icons {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 10px; /* Adjusted top position */
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.like-icon, .dislike-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+}
+
+.like-icon {
+    color: blue;
+    left: 25px;
+    top: 10px; /* Adjusted top position */
+}
+
+.dislike-icon {
+    color: red;
+    right: 25px;
+    top: 10px; /* Adjusted top position */
+}
+
+.like-icon:hover, .dislike-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Pretest result styling */
+.pretest-result {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #e9c46a;
+}
+
+/* General styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(135deg, #012952, #410101); 
+    margin: 0;
+    color: #fff;
+}
+
+/* Navigation styling */
+nav {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #ffffff; 
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav h1 {
+    font-size: 2rem;
+    color: #003366; 
+    margin: 0 10px; 
+}
+
+nav .fa-flag-usa {
+    font-size: 2rem;
+    color: #ff0000; 
+}
+
+/* Container styling */
+.container {
+    text-align: center;
+    margin-top: 100px; 
+}
+
+/* Top bar styling */
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.shuffle-button,
+.favorites-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: 0 10px;
+}
+
+.shuffle-button:hover,
+.favorites-button:hover {
+    background-color: #3b78d8;
+    transform: scale(1.1);
+}
+
+/* Question section styling */
+.question-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#question-number {
+    font-size: 1.5rem;
+    margin: 0 10px;
+}
+
+/* Favorite icon styling */
+.favorite-icon {
+    font-size: 1.5rem;
+    color: #a4a5a5;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s;
+}
+
+.favorite-icon:hover {
+    transform: scale(1.2);
+}
+
+.favorite-icon.active {
+    color: #e5ff00;
+}
+
+/* Card wrapper to position arrows and card */
+.card-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Flashcard styling */
+.flashcard {
+    width: 350px;
+    height: 220px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+    margin: 0 70px; /* Space for arrows */
+}
+
+.flashcard div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: transform 0.6s;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.front {
+    background-color: #cfcbcb;
+    color: #333;
+    transform: rotateY(0deg);
+    position: relative;
+}
+
+.back {
+    background-color: #437de9;
+    color: #ffffff;
+    transform: rotateY(180deg);
+}
+
+.flashcard.flipped .front {
+    transform: rotateY(-180deg);
+}
+
+.flashcard.flipped .back {
+    transform: rotateY(0deg);
+}
+
+#question, #answer {
+    font-size: 1.5rem; 
+}
+
+/* Arrow styling */
+.arrow {
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    color: #ffffff;
+    transition: transform 0.3s;
+}
+
+.arrow:hover {
+    transform: scale(1.2);
+}
+
+.left-arrow {
+    left: -20px;
+    position: absolute;
+}
+
+.right-arrow {
+    right: -50px; 
+    position: absolute;
+}
+
+/* Search container styling */
+.search-container {
+    margin-top: 60px; /* Adjust margin-top to move the search container down */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-input {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #3b78d8;
+    transform: scale(1.1);
+}
+
+/* Footer styling */
+footer {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #181616; 
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+footer p {
+    font-size: 1rem;
+    color: #4e51f3; 
+    margin: 0;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    nav h1 {
+        font-size: 1.0rem;
+    }
+
+    .flashcard {
+        width: 280px; 
+        height: 180px;
+        margin: 0 20px; /* Reduced space for arrows */
+    }
+
+    .left-arrow, .right-arrow {
+        font-size: 1.5rem;
+    }
+
+    .container, .search-container {
+        margin-top: 60px;
+    }
+
+    #question, #answer {
+        font-size: 1.2rem;
+    }
+
+    button, #search-input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;
+    }
+
+    .flashcard {
+        margin: 0 10px;
+    }
+
+    nav, footer {
+        flex-direction: column;
+        padding: 5px 0;
+    }
+
+    .left-arrow, .right-arrow {
+        font-size: 1.2rem;
+    }
+}
+.hidden {
+    display: none;
+}
+.main-page-button-container {
+    margin-top: 90px; 
+}
+.main-page-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.main-page-button:hover {
+    background-color: #3b78d8;
+    transform: scale(1.1);
+}
