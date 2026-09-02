@@ -52,7 +52,7 @@ body::before {
     background-position: center;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%) rotate(-16deg);
-    opacity: 0.09;
+    opacity: 0.05;
     z-index: -1;
     pointer-events: none;
 }
@@ -220,17 +220,16 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    gap: 18px;
 }
 
 /* Flashcard styling */
 .flashcard {
-    width: 350px;
-    height: 235px;
+    width: 400px;
+    height: 260px;
     perspective: 1000px;
     cursor: pointer;
     position: relative;
-    margin: 0 65px;
 }
 
 .flashcard > div {
@@ -311,27 +310,26 @@ button:hover {
 
 /* Arrow styling */
 .arrow {
-    font-size: 1.9rem;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
     cursor: pointer;
     user-select: none;
     color: #ffffff;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    opacity: 0.85;
+    background: rgba(6, 16, 32, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .arrow:hover {
-    transform: scale(1.15);
-    opacity: 1;
-}
-
-.left-arrow {
-    left: -6px;
-    position: absolute;
-}
-
-.right-arrow {
-    right: -6px;
-    position: absolute;
+    transform: scale(1.1);
+    background: rgba(6, 16, 32, 0.65);
 }
 
 /* Search container styling */
@@ -384,13 +382,18 @@ footer p {
     }
 
     .flashcard {
-        width: 280px;
-        height: 210px;
-        margin: 0 20px;
+        width: 320px;
+        height: 225px;
     }
 
-    .left-arrow, .right-arrow {
-        font-size: 1.5rem;
+    .card-wrapper {
+        gap: 14px;
+    }
+
+    .arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 1.15rem;
     }
 
     .container, .search-container {
@@ -413,9 +416,18 @@ footer p {
     }
 
     .flashcard {
-        margin: 0 8px;
-        width: 240px;
-        height: 215px;
+        width: clamp(180px, 62vw, 260px);
+        height: 220px;
+    }
+
+    .card-wrapper {
+        gap: 8px;
+    }
+
+    .arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 1.05rem;
     }
 
     .card-badge {
@@ -424,10 +436,6 @@ footer p {
 
     nav, footer {
         flex-direction: column;
-    }
-
-    .left-arrow, .right-arrow {
-        font-size: 1.3rem;
     }
 
     #question, #answer {
