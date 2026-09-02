@@ -1,79 +1,40 @@
-/* Pretest button styling */
-.pretest-button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #f4a261;
-    color: #fff;
-    transition: background-color 0.3s, transform 0.3s;
-    margin: 0 10px;
+/* ==========================================================================
+   Base palette (patriotic, kept simple: navy / white / red)
+   ========================================================================== */
+
+:root {
+    --navy: #0b2545;
+    --navy-light: #16355f;
+    --navy-lighter: #1f4880;
+    --red: #c0293d;
+    --red-dark: #9e2032;
+    --gold: #f5c116;
+    --text-light: #eef2f8;
+    --text-muted: #b8c4d6;
 }
 
-.pretest-button:hover {
-    background-color: #e76f51;
-    transform: scale(1.1);
-}
-
-/* Pretest icons styling */
-.pretest-icons {
-    display: none;
-    position: absolute;
-    width: 100%;
-    top: 10px; /* Adjusted top position */
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-.like-icon, .dislike-icon {
-    font-size: 2rem;
-    cursor: pointer;
-    user-select: none;
-    position: absolute;
-}
-
-.like-icon {
-    color: blue;
-    left: 25px;
-    top: 10px; /* Adjusted top position */
-}
-
-.dislike-icon {
-    color: red;
-    right: 25px;
-    top: 10px; /* Adjusted top position */
-}
-
-.like-icon:hover, .dislike-icon:hover {
-    transform: scale(1.2);
-}
-
-/* Pretest result styling */
-.pretest-result {
-    margin-top: 20px;
-    font-size: 1.5rem;
-    color: #e9c46a;
+* {
+    box-sizing: border-box;
 }
 
 /* General styling */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-    background: linear-gradient(135deg, #012952, #410101); 
+    min-height: 100vh;
+    background: linear-gradient(150deg, var(--navy) 0%, #14213d 55%, var(--red-dark) 130%);
     margin: 0;
-    color: #fff;
+    color: var(--text-light);
 }
 
 /* Navigation styling */
 nav {
     width: 100%;
-    padding: 10px 0;
-    background-color: #ffffff; 
+    padding: 14px 0;
+    background-color: #ffffff;
     text-align: center;
     position: fixed;
     top: 0;
@@ -82,23 +43,27 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
 nav h1 {
-    font-size: 2rem;
-    color: #003366; 
-    margin: 0 10px; 
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+    margin: 0 10px;
 }
 
 nav .fa-flag-usa {
-    font-size: 2rem;
-    color: #ff0000; 
+    font-size: 1.5rem;
+    color: var(--red);
 }
 
 /* Container styling */
 .container {
     text-align: center;
-    margin-top: 100px; 
+    margin-top: 110px;
+    padding: 0 16px;
 }
 
 /* Top bar styling */
@@ -106,26 +71,88 @@ nav .fa-flag-usa {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
+/* Shared button look (shuffle / favorites / search / pretest / main page) */
+.pretest-button,
 .shuffle-button,
-.favorites-button {
-    padding: 10px 15px;
-    font-size: 1rem;
+.favorites-button,
+.main-page-button,
+button {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
     border: none;
-    border-radius: 5px;
-    background-color: #4a90e2;
+    border-radius: 8px;
+    background-color: var(--navy-light);
     color: #fff;
-    transition: background-color 0.3s, transform 0.3s;
-    margin: 0 10px;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+.pretest-button:hover,
 .shuffle-button:hover,
-.favorites-button:hover {
-    background-color: #3b78d8;
-    transform: scale(1.1);
+.favorites-button:hover,
+.main-page-button:hover,
+button:hover {
+    background-color: var(--navy-lighter);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
+}
+
+/* Pretest CTA stands out as its own call to action */
+.pretest-button {
+    background-color: var(--red);
+}
+
+.pretest-button:hover {
+    background-color: var(--red-dark);
+}
+
+/* Pretest icons styling */
+.pretest-icons {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 12px;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.like-icon, .dislike-icon {
+    font-size: 1.9rem;
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+    transition: transform 0.2s ease;
+}
+
+.like-icon {
+    color: #2f6fed;
+    left: 22px;
+    top: 12px;
+}
+
+.dislike-icon {
+    color: var(--red);
+    right: 22px;
+    top: 12px;
+}
+
+.like-icon:hover, .dislike-icon:hover {
+    transform: scale(1.15);
+}
+
+/* Pretest result styling */
+.pretest-result {
+    margin-top: 20px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gold);
 }
 
 /* Question section styling */
@@ -133,29 +160,32 @@ nav .fa-flag-usa {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    gap: 10px;
 }
 
 #question-number {
-    font-size: 1.5rem;
-    margin: 0 10px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-light);
 }
 
 /* Favorite icon styling */
 .favorite-icon {
-    font-size: 1.5rem;
-    color: #a4a5a5;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     user-select: none;
-    transition: transform 0.3s;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .favorite-icon:hover {
-    transform: scale(1.2);
+    transform: scale(1.15);
 }
 
 .favorite-icon.active {
-    color: #e5ff00;
+    color: var(--gold);
 }
 
 /* Card wrapper to position arrows and card */
@@ -173,7 +203,7 @@ nav .fa-flag-usa {
     perspective: 1000px;
     cursor: pointer;
     position: relative;
-    margin: 0 70px; /* Space for arrows */
+    margin: 0 65px;
 }
 
 .flashcard div {
@@ -184,21 +214,22 @@ nav .fa-flag-usa {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 16px;
     transition: transform 0.6s;
-    padding: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
 }
 
 .front {
-    background-color: #cfcbcb;
-    color: #333;
+    background-color: #f7f8fa;
+    color: #16233b;
     transform: rotateY(0deg);
     position: relative;
+    border: 1px solid rgba(11, 37, 69, 0.08);
 }
 
 .back {
-    background-color: #437de9;
+    background: linear-gradient(155deg, var(--navy-lighter), var(--navy));
     color: #ffffff;
     transform: rotateY(180deg);
 }
@@ -212,70 +243,59 @@ nav .fa-flag-usa {
 }
 
 #question, #answer {
-    font-size: 1.5rem; 
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 /* Arrow styling */
 .arrow {
-    font-size: 2rem;
+    font-size: 1.9rem;
     cursor: pointer;
     user-select: none;
     color: #ffffff;
-    transition: transform 0.3s;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 0.85;
 }
 
 .arrow:hover {
-    transform: scale(1.2);
+    transform: scale(1.15);
+    opacity: 1;
 }
 
 .left-arrow {
-    left: -20px;
+    left: -6px;
     position: absolute;
 }
 
 .right-arrow {
-    right: -50px; 
+    right: -6px;
     position: absolute;
 }
 
 /* Search container styling */
 .search-container {
-    margin-top: 60px; /* Adjust margin-top to move the search container down */
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 
 #search-input {
-    padding: 10px;
-    font-size: 1rem;
+    padding: 10px 14px;
+    font-size: 0.95rem;
     border: none;
-    border-radius: 5px;
-    margin-right: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #4a90e2;
-    color: #fff;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-button:hover {
-    background-color: #3b78d8;
-    transform: scale(1.1);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    width: 130px;
 }
 
 /* Footer styling */
 footer {
     width: 100%;
-    padding: 10px 0;
-    background-color: #181616; 
+    padding: 12px 0;
+    background-color: rgba(6, 16, 32, 0.9);
     text-align: center;
     position: fixed;
     bottom: 0;
@@ -283,21 +303,29 @@ footer {
 }
 
 footer p {
-    font-size: 1rem;
-    color: #4e51f3; 
+    font-size: 0.9rem;
+    color: var(--text-muted);
     margin: 0;
+}
+
+.main-page-button-container {
+    margin-top: 90px;
+}
+
+.hidden {
+    display: none;
 }
 
 /* Media queries for responsive design */
 @media (max-width: 768px) {
     nav h1 {
-        font-size: 1.0rem;
+        font-size: 1.1rem;
     }
 
     .flashcard {
-        width: 280px; 
-        height: 180px;
-        margin: 0 20px; /* Reduced space for arrows */
+        width: 280px;
+        height: 190px;
+        margin: 0 20px;
     }
 
     .left-arrow, .right-arrow {
@@ -309,14 +337,13 @@ footer p {
     }
 
     #question, #answer {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
     }
 
     button, #search-input {
-        font-size: 0.9rem;
-        padding: 8px;
+        font-size: 0.88rem;
+        padding: 9px 14px;
     }
-    
 }
 
 @media (max-width: 480px) {
@@ -325,36 +352,20 @@ footer p {
     }
 
     .flashcard {
-        margin: 0 10px;
+        margin: 0 8px;
+        width: 240px;
+        height: 190px;
     }
 
     nav, footer {
         flex-direction: column;
-        padding: 5px 0;
     }
 
     .left-arrow, .right-arrow {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
-}
-.hidden {
-    display: none;
-}
-.main-page-button-container {
-    margin-top: 90px; 
-}
-.main-page-button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #4a90e2;
-    color: #fff;
-    transition: background-color 0.3s, transform 0.3s;
-}
 
-.main-page-button:hover {
-    background-color: #3b78d8;
-    transform: scale(1.1);
+    #question, #answer {
+        font-size: 1.05rem;
+    }
 }
