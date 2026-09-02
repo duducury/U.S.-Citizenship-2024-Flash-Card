@@ -1,48 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flash Card Game</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>U.S. Citizenship Civics Test — Flash Cards</title>
+<meta name="description" content="Study for the U.S. naturalization civics interview with flashcards, category study, favorites, and a full practice test — 2020 and 2025 USCIS test versions.">
+<meta name="theme-color" content="#0a2340">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon.svg">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <nav>
-        <h1><i class="fas fa-flag-usa"></i> U.S. Citizenship 2024 Flash Card Game <i class="fas fa-flag-usa"></i></h1>
-    </nav> 
-    <div class="pretest-container">
-            <a href="pretest.html" class="pretest-button">Start Pre Test</a>
-        </div>
-    <div class="container">
-        <div class="top-bar">
-            <button class="shuffle-button" onclick="shuffleCards()">Shuffle</button>
-            <button class="favorites-button" onclick="toggleFavoriteMode()">View Favorites</button>
-        </div>
-        <div class="question-section">
-            <p id="question-number"></p>
-            <i class="fas fa-star favorite-icon" onclick="toggleFavorite(event)"></i>
-        </div>
-        <div class="card-wrapper">
-            <div class="arrow left-arrow" onclick="prevCard()">&#9664;</div>
-            <div class="flashcard" onclick="flipCard()">
-                <div class="front">
-                    <p id="question">Question will appear here</p>
-                </div>
-                <div class="back">
-                    <p id="answer">Answer will appear here</p>
-                </div>
-            </div>
-            <div class="arrow right-arrow" onclick="nextCard()">&#9654;</div>
-        </div>
-        <div class="search-container">
-            <input type="number" id="search-input" placeholder="Number" min="1" max="100">
-            <button onclick="searchCard()">Go</button>
-        </div>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="app-header">
+  <div class="header-inner">
+    <button class="brand" id="brand-home-btn" data-route="home" aria-label="Go to home">
+      <span class="brand-flag" aria-hidden="true">🇺🇸</span>
+      <span class="brand-text">
+        <span>U.S. Citizenship</span>
+        <span class="brand-sub">Civics Test</span>
+      </span>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Primary">
+      <button class="nav-link" data-route="study">Study</button>
+      <button class="nav-link" data-route="practice">Practice Test</button>
+      <button class="nav-link" data-route="favorites">Favorites</button>
+      <button class="nav-link" data-route="categories">Categories</button>
+      <button class="nav-link" data-route="progress">Progress</button>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="search-toggle" aria-label="Search questions" title="Search questions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
-    <footer>
-        <p>Created by Eduardo Cury</p>
-    </footer>
-    <script src="script.js"></script>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- ===================== HOME ===================== -->
+  <section class="view" id="view-home" data-view="home">
+    <div class="hero">
+      <div class="hero-flag" aria-hidden="true">🇺🇸</div>
+      <h1>U.S. Citizenship Civics Test</h1>
+      <p>Prepare for your citizenship interview with confidence.</p>
+      <div class="version-banner">
+        <span id="version-summary">2025 Civics Test · 128 questions</span>
+        <label class="visually-hidden" for="version-select-home">Test version</label>
+        <select id="version-select-home" class="select-pill"></select>
+        <a id="official-link-home" href="#" target="_blank" rel="noopener">Verify on USCIS.gov ↗</a>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <button class="dash-card" data-route="study">
+        <span class="dash-icon" aria-hidden="true">📚</span>
+        <h3>Study Questions</h3>
+        <p>Flip through every civics question, one flashcard at a time.</p>
+      </button>
+      <button class="dash-card" data-route="practice">
+        <span class="dash-icon" aria-hidden="true">🎯</span>
+        <h3>Practice Test</h3>
+        <p>Simulate the real interview and track your score.</p>
+      </button>
+      <button class="dash-card" data-route="favorites">
+        <span class="dash-icon" aria-hidden="true">⭐</span>
+        <h3>Favorites</h3>
+        <p>Review the questions you've marked to study again.</p>
+      </button>
+      <button class="dash-card" id="home-shuffle-btn">
+        <span class="dash-icon" aria-hidden="true">🔀</span>
+        <h3>Shuffle</h3>
+        <p>Jump into a randomly ordered study session.</p>
+      </button>
+    </div>
+
+    <div class="stats-section">
+      <h2>Your progress</h2>
+      <div class="stats-grid">
+        <div class="stat-tile"><div class="stat-value" id="stat-studied">0</div><div class="stat-label">Questions studied</div></div>
+        <div class="stat-tile"><div class="stat-value" id="stat-favorites">0</div><div class="stat-label">Favorites</div></div>
+        <div class="stat-tile"><div class="stat-value" id="stat-tests">0</div><div class="stat-label">Tests completed</div></div>
+        <div class="stat-tile"><div class="stat-value" id="stat-best">—</div><div class="stat-label">Best score</div></div>
+        <div class="stat-tile"><div class="stat-value" id="stat-progress">0%</div><div class="stat-label">Progress</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STUDY ===================== -->
+  <section class="view" id="view-study" data-view="study">
+    <div class="view-header">
+      <div>
+        <h2 id="study-title">Study Questions</h2>
+        <p class="view-subtitle" id="study-subtitle">All questions, in order</p>
+      </div>
+      <div class="toolbar" style="margin-bottom:0;">
+        <button class="btn" id="study-shuffle-btn" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+          Shuffle
+        </button>
+        <button class="btn" id="study-restart-btn">Reset order</button>
+      </div>
+    </div>
+
+    <div class="category-pill-bar" id="study-category-bar"></div>
+
+    <div class="study-progress">
+      <div class="study-progress-label">
+        <span>Question <strong id="study-position">1</strong> / <span id="study-total">128</span></span>
+        <span id="study-percent">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="study-progress-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="study-stage">
+      <div class="card-row">
+        <button class="nav-arrow" id="study-prev" aria-label="Previous question">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="flashcard-scene">
+          <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Flashcard. Press space or enter to flip.">
+            <div class="card-face card-front">
+              <span class="card-index-badge" id="card-index-front">Question 1</span>
+              <button class="card-fav-btn" id="fav-btn-front" aria-label="Add to favorites" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3.5l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.8l6-.8z"/></svg>
+              </button>
+              <span class="card-eyebrow" id="card-category-front">Category</span>
+              <p class="card-question" id="card-question">Question will appear here</p>
+              <span class="card-hint">Tap to reveal answer</span>
+            </div>
+            <div class="card-face card-back">
+              <span class="card-index-badge" id="card-index-back">Question 1</span>
+              <button class="card-fav-btn" id="fav-btn-back" aria-label="Add to favorites" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3.5l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.8l6-.8z"/></svg>
+              </button>
+              <span class="card-eyebrow">Answer</span>
+              <p class="card-answer" id="card-answer">Answer will appear here</p>
+              <p class="card-answer-list hidden" id="card-answer-list"></p>
+              <p class="card-dynamic-note hidden" id="card-dynamic-note"></p>
+              <span class="card-hint">Tap to see question</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="nav-arrow" id="study-next" aria-label="Next question">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <div class="study-actions">
+        <div class="search-box" style="flex:0 1 220px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="number" id="jump-input" min="1" placeholder="Jump to #" aria-label="Jump to question number">
+        </div>
+        <button class="btn" id="jump-btn">Go</button>
+      </div>
+
+      <div class="shortcuts-panel">
+        <span><span class="kbd-hint">←</span> <span class="kbd-hint">→</span> navigate</span>
+        <span><span class="kbd-hint">Space</span> / <span class="kbd-hint">Enter</span> flip</span>
+        <span><span class="kbd-hint">F</span> favorite</span>
+        <span><span class="kbd-hint">S</span> shuffle</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SEARCH ===================== -->
+  <section class="view" id="view-search" data-view="search">
+    <div class="view-header">
+      <div>
+        <h2>Search Questions</h2>
+        <p class="view-subtitle">Search by question, answer, or category</p>
+      </div>
+    </div>
+    <div class="search-box" style="max-width:520px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="search-input" placeholder="Search questions..." aria-label="Search questions" autocomplete="off">
+      <button class="clear-btn" id="search-clear-btn" aria-label="Clear search">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="search-results-list" id="search-results"></div>
+  </section>
+
+  <!-- ===================== CATEGORIES ===================== -->
+  <section class="view" id="view-categories" data-view="categories">
+    <div class="view-header">
+      <div>
+        <h2>Study by Category</h2>
+        <p class="view-subtitle">Focus on one topic at a time</p>
+      </div>
+    </div>
+    <div class="categories-grid" id="categories-grid"></div>
+  </section>
+
+  <!-- ===================== FAVORITES ===================== -->
+  <section class="view" id="view-favorites" data-view="favorites">
+    <div class="view-header">
+      <div>
+        <h2>My Favorites</h2>
+        <p class="view-subtitle"><span id="favorites-count">0</span> saved questions</p>
+      </div>
+      <div class="toolbar" style="margin-bottom:0;">
+        <button class="btn btn-primary" id="favorites-study-btn">Study Favorites</button>
+        <button class="btn btn-accent" id="favorites-test-btn">Mini Test</button>
+      </div>
+    </div>
+    <div id="favorites-content"></div>
+  </section>
+
+  <!-- ===================== PROGRESS ===================== -->
+  <section class="view" id="view-progress" data-view="progress">
+    <div class="view-header">
+      <div>
+        <h2>Your Progress</h2>
+        <p class="view-subtitle">Everything is saved on this device</p>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-tile"><div class="stat-value" id="stat-studied-2">0</div><div class="stat-label">Questions studied</div></div>
+      <div class="stat-tile"><div class="stat-value" id="stat-favorites-2">0</div><div class="stat-label">Favorites</div></div>
+      <div class="stat-tile"><div class="stat-value" id="stat-tests-2">0</div><div class="stat-label">Tests completed</div></div>
+      <div class="stat-tile"><div class="stat-value" id="stat-best-2">—</div><div class="stat-label">Best score</div></div>
+      <div class="stat-tile"><div class="stat-value" id="stat-progress-2">0%</div><div class="stat-label">Progress</div></div>
+    </div>
+    <div class="section-gap">
+      <h2 style="font-size:1.05rem;">Recent practice tests</h2>
+      <div id="test-history-list" class="favorites-list"></div>
+    </div>
+    <div class="section-gap text-center">
+      <button class="btn" id="reset-progress-btn">Reset all saved progress</button>
+    </div>
+  </section>
+
+  <!-- ===================== PRACTICE TEST ===================== -->
+  <section class="view" id="view-practice" data-view="practice">
+
+    <div id="practice-setup-screen">
+      <div class="view-header">
+        <div>
+          <h2>Practice Test</h2>
+          <p class="view-subtitle">Choose a mode. This mirrors the real oral interview — the answer is revealed on the card, you judge yourself.</p>
+        </div>
+      </div>
+      <div class="practice-setup">
+        <button class="practice-mode-card" data-mode="full">
+          <span class="pm-icon" aria-hidden="true">🇺🇸</span>
+          <h3>Full Practice Test</h3>
+          <p>Answer <span id="mode-full-count">20</span> questions, just like the real interview.</p>
+          <span class="pm-meta" id="mode-full-meta">Need 12/20 to pass</span>
+        </button>
+        <button class="practice-mode-card" data-mode="random20">
+          <span class="pm-icon" aria-hidden="true">🎲</span>
+          <h3>Random 20 Questions</h3>
+          <p>A fresh, randomly picked set every time you play.</p>
+          <span class="pm-meta">Untimed · self-graded</span>
+        </button>
+        <button class="practice-mode-card" data-mode="favorites">
+          <span class="pm-icon" aria-hidden="true">⭐</span>
+          <h3>Study Favorites</h3>
+          <p>Test yourself only on the questions you've starred.</p>
+          <span class="pm-meta" id="mode-fav-meta">0 favorites saved</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="practice-active-screen" class="hidden">
+      <div class="practice-hud">
+        <span id="practice-position">Question 1 of 20</span>
+        <span class="score-chip">Score: <span id="practice-score">0</span> / <span id="practice-total">20</span></span>
+      </div>
+      <div class="progress-track" style="max-width:520px;margin:0 auto 1.4rem;"><div class="progress-fill" id="practice-progress-fill" style="width:0%"></div></div>
+
+      <div class="study-stage">
+        <div class="card-row">
+          <div class="flashcard-scene">
+            <div class="flashcard" id="practice-flashcard" tabindex="0" role="button" aria-label="Flashcard. Press space or enter to flip.">
+              <div class="card-face card-front">
+                <span class="card-index-badge" id="practice-index-front">Question 1</span>
+                <span class="card-eyebrow" id="practice-category-front">Category</span>
+                <p class="card-question" id="practice-question">Question will appear here</p>
+                <span class="card-hint">Say your answer out loud, then tap to reveal</span>
+              </div>
+              <div class="card-face card-back">
+                <span class="card-index-badge" id="practice-index-back">Question 1</span>
+                <span class="card-eyebrow">Answer</span>
+                <p class="card-answer" id="practice-answer">Answer will appear here</p>
+                <p class="card-dynamic-note hidden" id="practice-dynamic-note"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="practice-answer-buttons">
+          <button class="answer-btn answer-correct" id="practice-correct-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M20 6L9 17l-5-5"/></svg>
+            I got it right
+          </button>
+          <button class="answer-btn answer-incorrect" id="practice-incorrect-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            I missed it
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center section-gap">
+        <button class="btn btn-ghost" id="practice-quit-btn">Quit test</button>
+      </div>
+    </div>
+
+    <div id="practice-results-screen" class="hidden">
+      <div class="result-screen">
+        <div class="result-flag" aria-hidden="true">🇺🇸</div>
+        <p class="result-title">TEST COMPLETE</p>
+        <div class="result-score" id="result-score">0 / 20</div>
+        <div class="result-badge" id="result-badge">PASS</div>
+        <p class="result-percent" id="result-percent">0%</p>
+        <div class="result-actions">
+          <button class="btn btn-primary" id="result-retry-btn">Try Again</button>
+          <button class="btn" id="result-review-btn">Review Missed Questions</button>
+          <button class="btn btn-ghost" data-route="home">Back to Home</button>
+        </div>
+        <div id="result-review-list" class="review-list hidden"></div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="app-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">🇺🇸 U.S. Citizenship Civics Test</div>
+    <p class="footer-tag">Study smarter. Prepare with confidence.</p>
+    <p class="footer-tag">Built by Eduardo Cury</p>
+    <p class="footer-disclaimer">
+      This is an independent study tool for educational purposes and is not affiliated with or endorsed by USCIS.
+      Always verify current questions and dynamic answers (President, Vice President, Governor, etc.) at
+      <a href="https://www.uscis.gov/citizenship" target="_blank" rel="noopener">uscis.gov/citizenship</a>.
+    </p>
+  </div>
+</footer>
+
+<div class="sr-toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/questions-2020.js"></script>
+<script src="js/questions-2025.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
