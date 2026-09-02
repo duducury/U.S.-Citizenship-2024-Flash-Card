@@ -18,6 +18,10 @@
 }
 
 /* General styling */
+html {
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     display: flex;
@@ -25,15 +29,32 @@ body {
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
-    background-image:
-        linear-gradient(150deg, rgba(11, 37, 69, 0.94) 0%, rgba(20, 33, 61, 0.94) 55%, rgba(158, 32, 50, 0.9) 130%),
-        url("assets/flag-bg.svg");
-    background-size: cover, cover;
-    background-position: center, center;
-    background-repeat: no-repeat, no-repeat;
-    background-attachment: fixed, fixed;
+    background: linear-gradient(150deg, var(--navy) 0%, #14213d 55%, var(--red-dark) 130%);
     margin: 0;
     color: var(--text-light);
+    overflow-x: hidden;
+    position: relative;
+    isolation: isolate;
+}
+
+/* Subtle waving-flag texture behind everything. Oversized + rotated so it
+   reads as a soft diagonal ripple instead of a flat rectangle, and still
+   covers narrow/tall mobile viewports without an awkward crop. */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 145vmax;
+    height: 145vmax;
+    background-image: url("assets/flag-bg.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%) rotate(-16deg);
+    opacity: 0.09;
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* Navigation styling */
@@ -265,9 +286,13 @@ button:hover {
 }
 
 .card-badge-icon {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1;
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.15));
+    color: var(--red);
+}
+
+.back .card-badge-icon {
+    color: #ffffff;
 }
 
 .flashcard.flipped .front {
